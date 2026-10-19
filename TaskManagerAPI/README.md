@@ -2,6 +2,28 @@
 
 A RESTful API built with Node.js, Express, and MongoDB for managing tasks. This project demonstrates complete CRUD operations with proper middleware implementation and MongoDB integration using Mongoose ODM.
 
+## Practical 7: Authentication and Middleware Pipeline
+
+The API supports bcrypt password hashing, one-hour JWTs, protected task routes, per-user task ownership, and server-side validation.
+
+### Run Practical 7
+
+1. Copy `.env.example` to `.env` and replace `JWT_SECRET` with a private random value. The root `.gitignore` excludes `.env`.
+2. Make sure MongoDB is running, then start the API with `npm start`.
+3. Start the frontend from `../task-manager-frontend` with `npm run dev`.
+
+### Authentication endpoints
+
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| POST | `/auth/register` | Register using `name`, `email`, and a password of at least 8 characters |
+| POST | `/auth/login` | Verify credentials and return a JWT that expires in one hour |
+| GET | `/me` | Return the authenticated user's name and email |
+
+All `/tasks` endpoints require `Authorization: Bearer <token>`. Tasks are scoped to the authenticated account. Invalid, missing, or expired tokens return JSON `401` responses.
+
+Run backend unit tests with `npm test` from `TaskManagerAPI`; they cover input validation and missing, invalid, and expired tokens.
+
 ## 🎯 Practical 5: MongoDB Integration with Mongoose
 
 This is an extension of Practical 4 that replaces the in-memory JavaScript array with persistent MongoDB storage using Mongoose.

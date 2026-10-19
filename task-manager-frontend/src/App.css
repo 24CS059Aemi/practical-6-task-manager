@@ -26,6 +26,384 @@ h2 {
 }
 
 form {
+    .app-shell {
+        --ink: #1c382b;
+        --muted: #647268;
+        --line: #dce3d8;
+        --paper: #fbfcf8;
+        --accent: #d95135;
+        min-height: 100vh;
+        padding: 0 7.2vw 72px;
+        color: var(--ink);
+        background: linear-gradient(90deg, rgba(28, 56, 43, 0.025) 1px, transparent 1px), linear-gradient(rgba(28, 56, 43, 0.025) 1px, transparent 1px), #f6f7f1;
+        background-size: 28px 28px;
+    }
+    .topbar {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+    }
+    .wordmark {
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 800;
+        text-decoration: none;
+        letter-spacing: 0.08em;
+    }
+    .account-tools {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        color: var(--muted);
+        font-size: 14px;
+    }
+    .auth-layout {
+        width: min(1040px, 100%);
+        min-height: min(690px, calc(100vh - 120px));
+        margin: 40px auto 0;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: clamp(40px, 8vw, 112px);
+    }
+    .auth-intro {
+        padding: 20px 0;
+    }
+    .eyebrow {
+        margin: 0 0 18px;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+    }
+    .auth-intro h1,
+    .workspace-heading h1 {
+        margin: 0;
+        color: var(--ink);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(44px, 5vw, 68px);
+        font-weight: 500;
+        line-height: 1.02;
+        letter-spacing: 0;
+    }
+    .intro-copy {
+        max-width: 360px;
+        margin-top: 24px;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.65;
+    }
+    .security-note {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 56px;
+        color: var(--muted);
+        font-size: 13px;
+    }
+    .security-mark {
+        display: grid;
+        width: 34px;
+        aspect-ratio: 1;
+        place-items: center;
+        border: 1px solid #c2d1c3;
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .auth-panel {
+        padding: 42px 0 42px 44px;
+        border-left: 1px solid var(--line);
+    }
+    .auth-heading h2,
+    .task-list-heading h2 {
+        margin: 0;
+        color: var(--ink);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 32px;
+        font-weight: 500;
+        letter-spacing: 0;
+    }
+    .auth-heading .eyebrow {
+        margin-bottom: 10px;
+    }
+    .mode-switch {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 28px 0 24px;
+        border-bottom: 1px solid var(--line);
+    }
+    .mode-switch button {
+        min-height: 42px;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    .mode-switch button.active {
+        border-bottom-color: var(--accent);
+        color: var(--ink);
+        font-weight: 700;
+    }
+    .auth-form,
+    .task-form {
+        display: grid;
+        gap: 18px;
+    }
+    .auth-form label,
+    .task-form label {
+        display: grid;
+        gap: 8px;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 700;
+    }
+    .auth-form input,
+    .task-form input {
+        width: 100%;
+        min-height: 46px;
+        padding: 0 13px;
+        border: 1px solid #cbd5cb;
+        border-radius: 2px;
+        background: var(--paper);
+        color: var(--ink);
+        font: inherit;
+        font-size: 14px;
+    }
+    .auth-form input:focus,
+    .task-form input:focus {
+        outline: 2px solid rgba(217, 81, 53, 0.24);
+        border-color: var(--accent);
+    }
+    .primary-button {
+        min-height: 46px;
+        padding: 0 18px;
+        border: 1px solid var(--ink);
+        border-radius: 2px;
+        background: var(--ink);
+        color: white;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 140ms ease, border-color 140ms ease;
+    }
+    .primary-button:hover:not(:disabled) {
+        border-color: var(--accent);
+        background: var(--accent);
+    }
+    .primary-button:disabled {
+        cursor: wait;
+        opacity: 0.65;
+    }
+    .quiet-button,
+    .delete-button {
+        min-height: 34px;
+        padding: 0 11px;
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        background: transparent;
+        color: var(--ink);
+        font: inherit;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .quiet-button:hover {
+        border-color: var(--ink);
+    }
+    .delete-button {
+        border-color: transparent;
+        color: #a53d2a;
+    }
+    .delete-button:hover {
+        border-color: #e9b9ac;
+        background: #fff4f0;
+    }
+    .notice {
+        width: min(1040px, 100%);
+        margin: 18px auto 0;
+        padding: 12px 15px;
+        border-left: 3px solid;
+        font-size: 14px;
+    }
+    .notice.error {
+        border-color: #b83e2a;
+        background: #fff1ed;
+        color: #812c1e;
+    }
+    .notice.success {
+        border-color: #4e7851;
+        background: #edf5eb;
+        color: #315638;
+    }
+    .task-workspace {
+        width: min(1040px, 100%);
+        margin: 58px auto 0;
+    }
+    .workspace-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 20px;
+        padding-bottom: 26px;
+        border-bottom: 1px solid var(--line);
+    }
+    .workspace-heading .eyebrow {
+        margin-bottom: 11px;
+    }
+    .workspace-heading h1 {
+        font-size: 48px;
+    }
+    .task-count {
+        color: var(--muted);
+        font-size: 13px;
+    }
+    .task-form {
+        grid-template-columns: minmax(180px, 1fr) minmax(220px, 1.4fr) auto;
+        align-items: end;
+        gap: 14px;
+        padding: 24px 0 30px;
+        border-bottom: 1px solid var(--line);
+    }
+    .task-form .primary-button {
+        min-width: 116px;
+    }
+    .task-list-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 28px 0 12px;
+    }
+    .task-list-heading h2 {
+        font-size: 25px;
+    }
+    .task-list-heading span,
+    .loading-copy {
+        color: var(--muted);
+        font-size: 12px;
+    }
+    .task-list {
+        border-top: 1px solid var(--line);
+    }
+    .task-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 100px auto;
+        align-items: center;
+        gap: 24px;
+        min-height: 88px;
+        padding: 14px 5px;
+        border-bottom: 1px solid var(--line);
+    }
+    .task-copy h3 {
+        margin: 0 0 5px;
+        color: var(--ink);
+        font-size: 15px;
+    }
+    .task-copy p {
+        overflow-wrap: anywhere;
+        color: var(--muted);
+        font-size: 13px;
+    }
+    .task-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--muted);
+        font-size: 12px;
+    }
+    .task-status::before {
+        width: 7px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: #d9953b;
+        content: "";
+    }
+    .task-status.completed::before {
+        background: #4e7851;
+    }
+    .task-buttons {
+        display: flex;
+        gap: 7px;
+    }
+    .empty-state,
+    .loading-panel {
+        padding: 30px 0;
+        color: var(--muted);
+        font-size: 14px;
+    }
+    .loading-panel {
+        width: min(1040px, 100%);
+        margin: 50px auto;
+        text-align: center;
+    }
+    @media (max-width: 760px) {
+        .app-shell {
+            padding: 0 22px 48px;
+        }
+        .auth-layout {
+            min-height: auto;
+            margin-top: 42px;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        .auth-intro h1 {
+            font-size: 48px;
+        }
+        .intro-copy {
+            margin-top: 14px;
+        }
+        .security-note {
+            margin-top: 24px;
+        }
+        .auth-panel {
+            padding: 28px 0 0;
+            border-top: 1px solid var(--line);
+            border-left: 0;
+        }
+        .task-workspace {
+            margin-top: 38px;
+        }
+        .workspace-heading h1 {
+            font-size: 40px;
+        }
+        .task-form {
+            grid-template-columns: 1fr;
+        }
+        .task-row {
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 10px;
+        }
+        .task-status {
+            justify-self: end;
+        }
+        .task-buttons {
+            grid-column: 1 / -1;
+            justify-content: end;
+        }
+    }
+    @media (max-width: 420px) {
+        .app-shell {
+            padding-inline: 16px;
+        }
+        .account-tools {
+            gap: 10px;
+            font-size: 12px;
+        }
+        .workspace-heading h1 {
+            font-size: 34px;
+        }
+        .task-list-heading span {
+            max-width: 120px;
+            text-align: right;
+        }
+    }
     display: flex;
     flex-direction: column;
     gap: 10px;
