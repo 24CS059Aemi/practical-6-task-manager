@@ -32,6 +32,12 @@ The authenticated `GET /tasks/cache/stats` endpoint returns the process-local hi
 
 See [PERFORMANCE.md](./PERFORMANCE.md) for Postman measurement instructions and a table to record three real uncached and cached readings.
 
+## Practical 10: Asynchronous Task Notifications
+
+The API uses Node.js's built-in `EventEmitter` for `task-created` and `task-deleted` notifications. Task notifications are emitted after the HTTP response finishes; the task-created listener logs its notification after a two-second delay. Listener failures are reported through the `task-notification-error` event, avoiding EventEmitter's special unhandled `error` event behavior.
+
+See [EVENTS.md](./EVENTS.md) for run instructions and the console/Postman evidence checklist.
+
 ## 🎯 Practical 5: MongoDB Integration with Mongoose
 
 This is an extension of Practical 4 that replaces the in-memory JavaScript array with persistent MongoDB storage using Mongoose.

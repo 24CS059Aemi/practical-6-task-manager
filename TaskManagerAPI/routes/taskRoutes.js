@@ -10,6 +10,7 @@ const {
     setCached,
     taskCacheKey
 } = require("../utils/taskCache");
+const taskEvents = require("../events");
 
 router.get("/cache/stats", (req, res) => {
     res.status(200).json(getCacheStats());
@@ -75,10 +76,20 @@ router.post("/", validateTask, async(req, res, next) => {
         const savedTask = await task.save();
         invalidateUserTaskCache(req.user.id);
 
-        res.status(201).json({
+        const responseBody = {
             message: "Task created successfully",
             task: savedTask
+        };
+        res.once("finish", () => {
+            const timestamp = new Date().toISOString();
+            console.log(`[API] Task-created response sent at ${timestamp}`);
+            taskEvents.emit("task-created", {
+                title: savedTask.title,
+                timestamp,
+                userId: req.user.id
+            });
         });
+        res.status(201).json(responseBody);
     } catch (error) {
         next(error);
     }
@@ -129,9 +140,16 @@ router.delete("/:id", async(req, res, next) => {
 
         invalidateUserTaskCache(req.user.id);
 
-        res.status(200).json({
+        const responseBody = {
             message: "Task deleted successfully"
+        };
+        res.once("finish", () => {
+            taskEvents.emit("task-deleted", {
+                title: task.title,
+                userId: req.user.id
+            });
         });
+        res.status(200).json(responseBody);
     } catch (error) {
         next(error);
     }
