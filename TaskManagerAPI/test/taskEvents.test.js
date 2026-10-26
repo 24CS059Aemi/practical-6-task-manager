@@ -6,9 +6,16 @@ const registerTaskListeners = require("../listeners/taskListeners");
 test("task-created notification runs asynchronously after event emission", async() => {
     const events = new TaskEvents();
     const messages = [];
+    let resolveNotification;
+    const notificationLogged = new Promise((resolve) => {
+        resolveNotification = resolve;
+    });
     registerTaskListeners(events, {
         delayMs: 10,
-        log: (message) => messages.push(message),
+        log: (message) => {
+            messages.push(message);
+            resolveNotification();
+        },
         logError: (message) => messages.push(message)
     });
 
@@ -19,7 +26,7 @@ test("task-created notification runs asynchronously after event emission", async
     });
     assert.deepEqual(messages, []);
 
-    await new Promise((resolve) => setTimeout(resolve, 30));
+    await notificationLogged;
     assert.match(messages[0], /Write tests/);
     assert.match(messages[0], /user-123/);
 });
