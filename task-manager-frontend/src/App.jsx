@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { RouteLink } from "./RouteLink.jsx";
 import "./App.css";
 
 const API_URL = "http://localhost:5000";
@@ -222,7 +223,12 @@ function App() {
     return (
         <main className="app-shell">
             <header className="topbar">
-                <a className="wordmark" href="#tasks">TASK / MANAGER</a>
+                <RouteLink className="wordmark" to="/">TASK / MANAGER</RouteLink>
+                <nav className="primary-nav" aria-label="Main navigation">
+                    <RouteLink to="/">Tasks</RouteLink>
+                    <RouteLink to="/projects">Projects</RouteLink>
+                    <RouteLink to="/contact">Contact</RouteLink>
+                </nav>
                 {user && (
                     <div className="account-tools">
                         <span>{user.name}</span>

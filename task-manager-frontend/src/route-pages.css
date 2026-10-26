@@ -1,0 +1,159 @@
+.primary-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.primary-nav a {
+    color: #647268;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.primary-nav a:hover,
+.primary-nav a[aria-current="page"] {
+    color: #1c382b;
+    text-decoration: underline;
+    text-decoration-color: #d95135;
+    text-underline-offset: 6px;
+}
+
+.route-loading {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    color: #647268;
+    font-size: 14px;
+}
+
+.route-page {
+    width: min(900px, 100%);
+    margin: 80px auto;
+}
+
+.route-page h1 {
+    max-width: 680px;
+    margin: 0;
+    color: #1c382b;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: 0;
+}
+
+.route-intro {
+    max-width: 520px;
+    margin-top: 20px;
+    color: #647268;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.project-summary {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 18px;
+    margin-top: 46px;
+    padding: 24px 0;
+    border-block: 1px solid #dce3d8;
+}
+
+.project-index {
+    color: #d95135;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.project-summary h2 {
+    margin: 0 0 5px;
+    color: #1c382b;
+    font-size: 18px;
+}
+
+.project-summary p,
+.project-register small {
+    color: #647268;
+    font-size: 13px;
+}
+
+.project-link,
+.contact-link {
+    color: #1c382b;
+    font-size: 13px;
+    font-weight: 700;
+    text-underline-offset: 4px;
+}
+
+.register-toggle {
+    margin-top: 24px;
+}
+
+.project-register {
+    margin: 20px 0 0;
+    padding: 0;
+    border-top: 1px solid #dce3d8;
+    list-style: none;
+}
+
+.project-register li {
+    display: grid;
+    grid-template-columns: 48px minmax(130px, 1fr) minmax(150px, 1.3fr);
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #dce3d8;
+    font-size: 13px;
+}
+
+.project-register li>span {
+    color: #d95135;
+}
+
+.project-register strong {
+    color: #1c382b;
+}
+
+.contact-link {
+    display: inline-block;
+    margin-top: 36px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #d95135;
+    text-decoration: none;
+}
+
+.contact-page {
+    min-height: 45vh;
+}
+
+@media (max-width: 600px) {
+    .topbar {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 14px 0;
+    }
+    .primary-nav {
+        order: 1;
+        width: 100%;
+        justify-content: space-between;
+        padding: 8px 0;
+    }
+    .route-page {
+        margin: 48px auto;
+    }
+    .route-page h1 {
+        font-size: 42px;
+    }
+    .project-summary {
+        grid-template-columns: 32px minmax(0, 1fr);
+    }
+    .project-link {
+        grid-column: 2;
+    }
+    .project-register li {
+        grid-template-columns: 32px minmax(0, 1fr);
+    }
+    .project-register small {
+        grid-column: 2;
+    }
+}
