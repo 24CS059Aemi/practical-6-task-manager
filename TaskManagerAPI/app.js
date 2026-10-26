@@ -39,6 +39,13 @@ mongoose.connect(MONGODB_URI)
 
 // Routes
 app.use("/auth", authRoutes);
+app.get("/health", (req, res) => {
+    const databaseReady = mongoose.connection.readyState === 1;
+    res.status(databaseReady ? 200 : 503).json({
+        status: databaseReady ? "ok" : "waiting",
+        database: databaseReady ? "connected" : "disconnected"
+    });
+});
 app.get("/me", auth, async(req, res, next) => {
     try {
         const user = await User.findById(req.user.id).select("name email");
@@ -66,7 +73,7 @@ app.use((req, res) => {
 app.use(errorHandler);
 
 // Start Server
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);

@@ -2,6 +2,10 @@
 
 Complete MERN-like application with React frontend, Express backend, and MongoDB database.
 
+## Practical 11: Docker Compose
+
+The application runs as a three-service Docker Compose stack. See [CONTAINERIZATION.md](./CONTAINERIZATION.md) for setup, startup, verification, and suggested lab screenshots.
+
 ---
 
 ## 📁 Project Structure

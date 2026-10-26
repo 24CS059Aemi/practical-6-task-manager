@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { RouteLink } from "./RouteLink.jsx";
 import "./App.css";
 
-const API_URL = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 async function apiRequest(path, token, options = {}) {
     const headers = { ...options.headers };
