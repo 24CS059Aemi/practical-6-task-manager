@@ -1,0 +1,61 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  backend-test:
+    name: Backend tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: TaskManagerAPI/package-lock.json
+
+      - name: Install backend dependencies
+        working-directory: TaskManagerAPI
+        run: npm ci
+
+      - name: Run backend tests
+        working-directory: TaskManagerAPI
+        env:
+          JWT_SECRET: ci-test-secret
+        run: npm test
+
+  frontend-check:
+    name: Frontend lint and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: task-manager-frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: task-manager-frontend
+        run: npm ci
+
+      - name: Lint frontend
+        working-directory: task-manager-frontend
+        run: npm run lint
+
+      - name: Build frontend
+        working-directory: task-manager-frontend
+        run: npm run build

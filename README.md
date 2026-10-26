@@ -2,6 +2,12 @@
 
 Complete MERN-like application with React frontend, Express backend, and MongoDB database.
 
+## Practical 12: GitHub Actions CI
+
+[![CI Pipeline](https://github.com/24CS059Aemi/practical-6-task-manager/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/24CS059Aemi/practical-6-task-manager/actions/workflows/ci.yml)
+
+The workflow runs backend tests and frontend lint/build on pushes and pull requests targeting `main`. See [CI_PIPELINE.md](./CI_PIPELINE.md) for workflow details and instructions to capture successful and intentionally failing test runs safely on a temporary branch.
+
 ## Practical 11: Docker Compose
 
 The application runs as a three-service Docker Compose stack. See [CONTAINERIZATION.md](./CONTAINERIZATION.md) for setup, startup, verification, and suggested lab screenshots.
