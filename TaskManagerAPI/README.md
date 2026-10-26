@@ -24,6 +24,14 @@ All `/tasks` endpoints require `Authorization: Bearer <token>`. Tasks are scoped
 
 Run backend unit tests with `npm test` from `TaskManagerAPI`; they cover input validation and missing, invalid, and expired tokens.
 
+## Practical 9: In-Memory Caching and Query Optimization
+
+`GET /tasks` and `GET /tasks/:id` use a process-local `node-cache` instance with a 60-second TTL. Cache keys include the authenticated user ID, so users cannot receive another user's task data. Successful task creation, update, and deletion invalidate every task cache entry for that user. Task GET responses include `X-Cache: HIT` or `X-Cache: MISS`.
+
+The authenticated `GET /tasks/cache/stats` endpoint returns the process-local hit, miss, and current-key counts. Restarting the API clears this cache and its counters. Because each server process has its own cache, multiple API instances do not share entries or invalidations; use a shared cache service such as Redis for multi-instance deployments.
+
+See [PERFORMANCE.md](./PERFORMANCE.md) for Postman measurement instructions and a table to record three real uncached and cached readings.
+
 ## 🎯 Practical 5: MongoDB Integration with Mongoose
 
 This is an extension of Practical 4 that replaces the in-memory JavaScript array with persistent MongoDB storage using Mongoose.
@@ -485,4 +493,3 @@ ISC
 - [Mongoose Docs](https://mongoosejs.com/)
 - [MongoDB Manual](https://docs.mongodb.com/manual/)
 - [REST API Best Practices](https://restfulapi.net/)
-
