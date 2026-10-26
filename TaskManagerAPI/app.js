@@ -16,6 +16,7 @@ const auth = require("./middleware/auth");
 const User = require("./models/User");
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 const taskEvents = require("./events");
 const registerTaskListeners = require("./listeners/taskListeners");
 
@@ -61,6 +62,7 @@ app.get("/me", auth, async(req, res, next) => {
     }
 });
 app.use("/tasks", auth, taskRoutes);
+app.use("/api/ai", auth, aiRoutes);
 
 // 404 Handler
 app.use((req, res) => {

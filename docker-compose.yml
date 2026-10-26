@@ -21,6 +21,7 @@ services:
     environment:
       JWT_SECRET: ${JWT_SECRET:-local-development-secret-change-before-deploy}
       MONGODB_URI: mongodb://mongodb:27017/taskdb_practical10
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       PORT: 5000
     ports:
       - "5000:5000"

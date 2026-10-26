@@ -38,6 +38,10 @@ The API uses Node.js's built-in `EventEmitter` for `task-created` and `task-dele
 
 See [EVENTS.md](./EVENTS.md) for run instructions and the console/Postman evidence checklist.
 
+## Practical 13: AI Task Description Suggestions
+
+The authenticated `POST /api/ai/generate-description` endpoint sends only the task title to OpenAI from the backend and returns an editable suggestion. Configure `OPENAI_API_KEY` in `TaskManagerAPI/.env` for local development; never put it in frontend variables or commit it. The frontend shows a loading state and disclaimer, allows editing, and remains usable when AI is missing or unavailable. See [AI_INTEGRATION.md](../AI_INTEGRATION.md) for setup, testing, and screenshot instructions.
+
 ## 🎯 Practical 5: MongoDB Integration with Mongoose
 
 This is an extension of Practical 4 that replaces the in-memory JavaScript array with persistent MongoDB storage using Mongoose.

@@ -38,6 +38,7 @@ The browser calls the API through the published host address `http://localhost:5
 ## Configuration and notes
 
 - Compose uses a local-only fallback JWT secret for this classroom practical. Set a private `JWT_SECRET` in the shell or a root `.env` file for local use; never commit real secrets.
+- For the Practical 13 AI feature in Compose, set `OPENAI_API_KEY` in a private root `.env` file before starting the stack. Compose passes it only to the backend service.
 - The API uses `MONGODB_URI=mongodb://mongodb:27017/taskdb_practical10` inside the Compose network.
 - `EXPOSE` in a Dockerfile documents a container port. Compose `ports` publishes a container port to the host, allowing the browser and tools to connect.
 - Each service has a `.dockerignore` excluding `node_modules`, environment files, and other non-build inputs.

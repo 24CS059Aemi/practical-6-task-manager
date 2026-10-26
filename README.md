@@ -2,6 +2,10 @@
 
 Complete MERN-like application with React frontend, Express backend, and MongoDB database.
 
+## Practical 13: AI Task Description Suggestions
+
+The task form can request an editable AI-generated description through a protected backend endpoint. The OpenAI key stays on the server, and the UI handles provider failures without blocking manual task creation. See [AI_INTEGRATION.md](./AI_INTEGRATION.md) for secure setup, testing, and screenshot guidance.
+
 ## Practical 12: GitHub Actions CI
 
 [![CI Pipeline](https://github.com/24CS059Aemi/practical-6-task-manager/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/24CS059Aemi/practical-6-task-manager/actions/workflows/ci.yml)

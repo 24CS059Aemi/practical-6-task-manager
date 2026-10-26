@@ -24,6 +24,9 @@ function App() {
     const [tasks, setTasks] = useState([]);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [aiLoading, setAiLoading] = useState(false);
+    const [aiMessage, setAiMessage] = useState("");
+    const [aiMessageIsError, setAiMessageIsError] = useState(false);
     const [authMode, setAuthMode] = useState("login");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -148,6 +151,31 @@ function App() {
             handleProtectedError(requestError);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const generateDescription = async () => {
+        if (!title.trim()) {
+            setAiMessage("Enter a task title first.");
+            setAiMessageIsError(true);
+            return;
+        }
+
+        try {
+            setAiLoading(true);
+            setAiMessage("");
+            setAiMessageIsError(false);
+            const result = await apiRequest("/api/ai/generate-description", token, {
+                method: "POST",
+                body: JSON.stringify({ title: title.trim() })
+            });
+            setDescription(result.description);
+            setAiMessage("AI suggestion added. Review or edit it before saving.");
+        } catch (requestError) {
+            setAiMessage(requestError.message || "AI suggestions are unavailable. You can write the description yourself.");
+            setAiMessageIsError(true);
+        } finally {
+            setAiLoading(false);
         }
     };
 
@@ -282,7 +310,15 @@ function App() {
                     </div>
                     <form className="task-form" onSubmit={addTask}>
                         <label>Task title<input type="text" placeholder="What needs doing?" value={title} onChange={(event) => setTitle(event.target.value)} maxLength={160} required /></label>
-                        <label>Description<input type="text" placeholder="Add a useful detail" value={description} onChange={(event) => setDescription(event.target.value)} /></label>
+                        <div className="description-field">
+                            <label htmlFor="task-description">Description</label>
+                            <input id="task-description" type="text" placeholder="Add a useful detail" value={description} onChange={(event) => setDescription(event.target.value)} />
+                            <button className="quiet-button ai-button" type="button" onClick={generateDescription} disabled={aiLoading || !title.trim()}>
+                                {aiLoading ? "Generating..." : "Generate description"}
+                            </button>
+                            <p className="ai-disclaimer">AI-generated suggestion—review and edit before saving. Only the task title is sent to the AI provider; do not include sensitive information.</p>
+                            {aiMessage && <p className={`ai-message ${aiMessageIsError ? "error" : ""}`} role={aiMessageIsError ? "alert" : "status"}>{aiMessage}</p>}
+                        </div>
                         <button className="primary-button" type="submit" disabled={loading}>Add task</button>
                     </form>
                     <div className="task-list-heading"><h2>All tasks</h2><span>Private to your account</span></div>
