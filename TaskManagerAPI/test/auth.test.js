@@ -31,7 +31,7 @@ function invokeAuth(authorization) {
 
 test("registration validation checks name, email, and password and normalizes inputs", () => {
     const invalid = validateRegistrationInput({ name: " ", email: "not-an-email", password: "short" });
-    assert.deepEqual(Object.keys(invalid.errors).sort(), ["email", "name", "password"]);
+    assert.deepEqual(Object.keys(invalid.errors).sort(), ["email", "name", "password", "wrong"]);
 
     const valid = validateRegistrationInput({ name: " Ada ", email: "ADA@example.com", password: "long-pass-123" });
     assert.deepEqual(valid.errors, {});
